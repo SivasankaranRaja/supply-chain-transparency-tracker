@@ -1,169 +1,152 @@
-# 🛠️ Supply Chain Transparency Tracker
 
-A blockchain-based supply chain management system that ensures product authenticity and transparency using Ethereum smart contracts, IPFS, and the MERN stack.
+# 📦 Supply Chain Transparency Tracker
+
+A blockchain-powered web application that enhances transparency and traceability in supply chains using Ethereum smart contracts, MongoDB, and a React frontend. Each product's journey is securely recorded on-chain and in a NoSQL database.
+
+---
+
+## 🌐 Tech Stack
+
+- **Frontend**: React.js
+- **Backend**: Node.js + Express.js
+- **Blockchain**: Ethereum (Solidity Smart Contracts, deployed on Sepolia testnet)
+- **Web3 Integration**: Web3.js
+- **Database**: MongoDB (Mongoose)
+- **File Storage**: IPFS (optional for document tracking)
+- **Wallet**: MetaMask
+
+---
 
 ## 🚀 Features
 
-- 🔐 **Blockchain Integration (Ethereum)** – Ensures tamper-proof product records.
-- 🌐 **Frontend (React.js)** – User-friendly interface to track and manage products.
-- 📦 **Backend (Node.js + Express + MongoDB)** – Stores non-sensitive product metadata.
-- 📡 **Smart Contract (Solidity)** – Immutable ledger for product lifecycle.
-- 📁 **IPFS (Planned)** – Decentralized file storage for documents or media.
+- ✅ Add new products with name, origin, destination, and other details
+- 🔗 Store product updates on Ethereum blockchain
+- 🧾 Sync off-chain product metadata with MongoDB
+- 🖥️ View all products in a single dashboard
+- 🔄 Update product status and location via UI
+- 🔍 Trace full journey using blockchain hash
 
 ---
 
-## 🧱 Tech Stack
+## 📁 Project Structure
 
-| Layer      | Technology                          |
-|------------|-------------------------------------|
-| Frontend   | React.js                            |
-| Backend    | Node.js, Express.js, MongoDB        |
-| Blockchain | Ethereum (Solidity, Web3.js)        |
-| Storage    | IPFS (InterPlanetary File System)   |
-| Wallet     | MetaMask                            |
-| Tools      | Hardhat / Remix, Ganache, Infura    |
+```bash
+supply-chain-transparency-tracker/
+│
+├── contracts/              # Solidity smart contracts
+├── frontend/               # React UI (Web3 integrated)
+├── backend/                # Express + MongoDB API
+├── migrations/             # Truffle migration scripts (if using Truffle)
+├── build/                  # Compiled contract ABIs
+├── .env                    # Environment variables
+├── README.md
+```
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Setup Instructions
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/SivasankaranRaja/supply-chain-transparency-tracker.git
 cd supply-chain-transparency-tracker
-2. Install Backend Dependencies
-bash
-Copy
-Edit
-cd supply-chain-backend
+```
+
+### 2. Install Dependencies
+
+#### Backend
+
+```bash
+cd backend
 npm install
-3. Install Frontend Dependencies
-bash
-Copy
-Edit
-cd ../supply-chain-frontend
+```
+
+#### Frontend
+
+```bash
+cd ../frontend
 npm install
-📜 Smart Contract Deployment
-You can use Remix, Hardhat, or Truffle to deploy the smart contract:
+```
 
-Navigate to contracts/SupplyChain.sol
+### 3. Smart Contract Deployment
 
-Deploy to Sepolia or other testnet.
+- Make sure you have [MetaMask](https://metamask.io/) and some Sepolia testnet ETH.
+- Deploy the smart contract using Hardhat or Truffle.
 
-After deployment, copy the contract address and ABI.
+```bash
+# Example using Hardhat
+npx hardhat run scripts/deploy.js --network sepolia
+```
 
-Update the values in:
+- Note the **deployed contract address** and **ABI**.
 
-bash
-Copy
-Edit
-supply-chain-frontend/src/blockchain/contract.js
-Example:
+### 4. Configure `.env`
 
-javascript
-Copy
-Edit
-export const contractAddress = "0xac7688b679634a62e928dcb7d9438a739d1f8ecb";
-export const contractABI = [ /* ...ABI here... */ ];
-📦 Environment Variables
-Create a .env file in the backend folder:
+```env
+# backend/.env
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/supplyChain
+CONTRACT_ADDRESS=0xac7688b679634a62e928dcb7d9438a739d1f8ecb
+INFURA_PROJECT_ID=your_infura_id
+```
 
-bash
-Copy
-Edit
-supply-chain-backend/.env
-Add the following:
+### 5. Run the App
 
-env
-Copy
-Edit
-MONGO_URI=your_mongodb_connection_string
-PORT=5000
-🧪 Run Locally
-Start Backend Server
-bash
-Copy
-Edit
-cd supply-chain-backend
+#### Backend
+
+```bash
+cd backend
 npm start
-Start Frontend App
-bash
-Copy
-Edit
-cd ../supply-chain-frontend
+```
+
+#### Frontend
+
+```bash
+cd ../frontend
 npm start
-Visit: http://localhost:3000
+```
 
-📸 Screenshots
-Add screenshots of UI displaying:
-
-Product List
-
-Product Detail View
-
-Blockchain Hash Display
-
-Update Status Page
-
-📂 Project Structure
-pgsql
-Copy
-Edit
-supply-chain-transparency-tracker/
-├── contracts/
-│   └── SupplyChain.sol
-├── supply-chain-backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── server.js
-│   └── .env
-├── supply-chain-frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── blockchain/
-│   │   └── App.js
-│   └── public/
-🧠 Future Enhancements
-📸 IPFS integration for storing certificates/media files
-
-🔁 QR code scanning and tracking from mobile
-
-🔐 Role-based access control (Manufacturer, Distributor, Retailer, Consumer)
-
-📊 Dashboard with analytics
-
-📱 Mobile-responsive or Flutter-based version
-
-🙌 Author
-Developed by Sivasankaran Raja
-
-📝 License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-yaml
-Copy
-Edit
+Visit `http://localhost:3000` to open the app.
 
 ---
 
-Let me know if you want this saved as a downloadable file or need a Hindi/Tamil version for local submission or presentation.
+## 🧠 Smart Contract Overview
 
+```solidity
+function addProduct(string memory _name, string memory _origin, string memory _destination) public;
+function updateProduct(uint _productId, string memory _status, string memory _location) public;
+function getProduct(uint _productId) public view returns (...);
+```
 
+Deployed on Sepolia:  
+**Contract Address**: `0xac7688b679634a62e928dcb7d9438a739d1f8ecb`
 
+---
 
+## 📌 Future Enhancements
 
+- ✅ QR code for product lookup
+- 📱 Mobile version using React Native or Flutter
+- 📦 Add IPFS support for storing documents/images
+- 📊 Blockchain explorer integration for audit trails
 
+---
 
+## 🤝 Contributing
 
-Ask ChatGPT
+Pull requests are welcome. For major changes, open an issue first to discuss your ideas.
 
+---
 
+## 📄 License
 
-Tools
+[MIT License](LICENSE)
 
+---
 
+## 🙋‍♂️ Author
 
-Chat
+**Sivasankaran Raja**  
+📧 [Reach out on LinkedIn](https://www.linkedin.com/in/sivasankaranraja)
+
+---
